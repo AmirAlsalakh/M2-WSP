@@ -6,8 +6,9 @@ class User
     public $lname;
     public $uname;
     public $password;
+    public $filename = "database.txt";
 
-    public function __construct($fname, $lname, $uname, $password)
+    public function saveData($fname, $lname, $uname, $password)
     {
         $this->fname = $this->cleanData($fname);
         $this->lname = $this->cleanData($lname);
@@ -22,15 +23,16 @@ class User
         return $data;
     }
 
-    public function save($filename = "database.txt")
+    public function save($fname, $lname, $uname, $password)
     {
+        $this->saveData($fname, $lname, $uname, $password);
         $output = "Förnamn: " . $this->fname . "\n";
         $output .= "Efternamn: " . $this->lname . "\n";
         $output .= "Användarnamn: " . $this->uname . "\n";
         $output .= "Lösenord: " . $this->password . "\n";
         $output .= "-----------------\n";
 
-        file_put_contents($filename, $output, FILE_APPEND);
+        file_put_contents($this->filename, $output, FILE_APPEND);
     }
 }
 
@@ -40,8 +42,8 @@ if (!empty($_POST)) {
     $uname = $_POST["uname"] ?? "";
     $password = $_POST["password"] ?? "";
 
-    $user = new User($fname, $lname, $uname, $password);
-    $user->save();
+    $user = new User();
+    $user->save($fname, $lname, $uname, $password);
 
     echo "<p>Användaren har sparats!</p>";
 }

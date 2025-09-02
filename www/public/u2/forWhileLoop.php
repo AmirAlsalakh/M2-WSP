@@ -10,9 +10,8 @@
 <body>
     <?php
     echo("<p> for loopen: <p>" . "<br>");
-    for ($i = 1; $i < 5;) {
-        echo ("<p>" . $i . "<p>" . "<br>");
-        $i = $i + 0.1;
+    for ($i = 1; $i < 5; $i = $i + 0.1) {
+        echo ("<p>" . $i . "<p>" . "<br>");  
     }
     echo("<p> ----- <p>" . "<br>");
     echo("<p> while loopen: <p>" . "<br>");
